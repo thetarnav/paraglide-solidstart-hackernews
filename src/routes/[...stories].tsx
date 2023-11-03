@@ -1,6 +1,6 @@
 import * as solid from 'solid-js'
 import * as start from 'solid-start'
-import * as api from '~/lib/api'
+import * as api from '~/api'
 
 const stories_map = {
     top: 'news',

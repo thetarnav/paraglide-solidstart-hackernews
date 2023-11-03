@@ -2,12 +2,15 @@
     "name": "paraglide-solidstart-example",
     "scripts": {
         "dev": "solid-start dev",
-        "build": "solid-start build",
+        "build:i18n": "paraglide-js compile --namespace hn",
+        "build:start": "solid-start build",
+        "build": "npm run build:i18n && npm run build:start",
         "start": "solid-start start"
     },
     "type": "module",
     "main": "./dist/index.js",
     "devDependencies": {
+        "@inlang/paraglide-js": "1.0.0-prerelease.5",
         "@types/babel__core": "^7.20.3",
         "@types/node": "^20.8.10",
         "esbuild": "^0.19.5",

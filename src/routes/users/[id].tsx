@@ -1,6 +1,6 @@
 import * as solid from 'solid-js'
 import * as start from 'solid-start'
-import * as api from '~/lib/api.js'
+import * as api from '~/api'
 
 export const routeData = (props: start.RouteDataArgs) => {
     const [user] = solid.createResource(() => `user/${props.params.id}`, api.unsafeFetchUser)

@@ -1,6 +1,6 @@
 import * as solid from 'solid-js'
 import * as start from 'solid-start'
-import * as api from '~/lib/api'
+import * as api from '~/api'
 
 export const routeData = (props: start.RouteDataArgs) => {
     const [story] = solid.createResource(() => `item/${props.params.id}`, api.unsafeFetchStory)

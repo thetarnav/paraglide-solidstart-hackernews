@@ -1,10 +1,11 @@
 // @refresh reload
 import * as solid from 'solid-js'
 import * as start from 'solid-start'
+import * as i18n from './i18n'
 
 import './root.css'
 
-export function Nav() {
+const Nav: solid.Component = () => {
     return (
         <header class="header">
             <nav class="inner">
@@ -29,7 +30,7 @@ export function Nav() {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    Built with Solid
+                    {i18n.m.built_with()}
                 </a>
             </nav>
         </header>
@@ -37,8 +38,10 @@ export function Nav() {
 }
 
 export default function Root() {
+    i18n.init()
+
     return (
-        <start.Html lang="en">
+        <start.Html lang={i18n.languageTag()}>
             <start.Head>
                 <start.Title>Paraglide SolidStart - Hacker News</start.Title>
                 <start.Meta charset="utf-8" />
@@ -60,10 +63,3 @@ export default function Root() {
         </start.Html>
     )
 }
-
-// if (import.meta.env.PROD && !isServer && "serviceWorker" in navigator) {
-//   // Use the window load event to keep the page load performant
-//   window.addEventListener("load", () => {
-//     navigator.serviceWorker.register(`/sw.js`);
-//   });
-// }
