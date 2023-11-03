@@ -1,3 +1,17 @@
 {
-    "built_with": "Stworzone z użyciem Paraglide i Solid"
+    "root_description": "Klon Hacker News zbudowany przy użyciu SolidStart i Paraglide",
+    "root_built_with": "Stworzone z użyciem Paraglide i Solid",
+    "nav_new": "Nowe",
+    "nav_show": "Pokaz",
+    "nav_ask": "Zapytaj",
+    "nav_job": "Praca",
+    "loading": "Ładowanie...",
+    "story_by": "przez",
+    "story_comments": "komentarze",
+    "story_discuss": "dyskusja",
+    "stories_page": "strona {count}",
+    "stories_prev": "wczesniej",
+    "stories_prev_page": "Wcześniejsza strona",
+    "stories_next": "więcej",
+    "stories_next_page": "Następna strona"
 }

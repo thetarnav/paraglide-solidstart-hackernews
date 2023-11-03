@@ -13,16 +13,16 @@ const Nav: solid.Component = () => {
                     <strong>HN</strong>
                 </start.A>
                 <start.A href="/new">
-                    <strong>New</strong>
+                    <strong>{i18n.m.nav_new()}</strong>
                 </start.A>
                 <start.A href="/show">
-                    <strong>Show</strong>
+                    <strong>{i18n.m.nav_show()}</strong>
                 </start.A>
                 <start.A href="/ask">
-                    <strong>Ask</strong>
+                    <strong>{i18n.m.nav_ask()}</strong>
                 </start.A>
                 <start.A href="/job">
-                    <strong>Jobs</strong>
+                    <strong>{i18n.m.nav_job()}</strong>
                 </start.A>
                 <a
                     class="github"
@@ -30,7 +30,7 @@ const Nav: solid.Component = () => {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    {i18n.m.built_with()}
+                    {i18n.m.root_built_with()}
                 </a>
                 <div class="language">
                     <select
@@ -58,13 +58,13 @@ export default function Root() {
                 <start.Title>Paraglide SolidStart - Hacker News</start.Title>
                 <start.Meta charset="utf-8" />
                 <start.Meta name="viewport" content="width=device-width, initial-scale=1" />
-                <start.Meta name="description" content="Hacker News Clone built with Solid" />
+                <start.Meta name="description" content={i18n.m.root_description()} />
                 <start.Link rel="manifest" href="/manifest.webmanifest" />
             </start.Head>
             <start.Body>
                 <Nav />
                 <solid.ErrorBoundary fallback={<></>}>
-                    <solid.Suspense fallback={<div class="news-list-nav">Loading...</div>}>
+                    <solid.Suspense fallback={<div class="news-list-nav">{i18n.m.loading()}</div>}>
                         <start.Routes>
                             <start.FileRoutes />
                         </start.Routes>

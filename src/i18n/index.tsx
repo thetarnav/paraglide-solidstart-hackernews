@@ -21,9 +21,9 @@ export const init = (): void => {
 
     m = {...messages}
     for (const [key, value] of entries(m)) {
-        m[key] = (...a) => {
+        m[key] = (a?: any) => {
             languageTag() // track languageTag
-            return value(...a)
+            return value(a)
         }
     }
 }
