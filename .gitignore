@@ -1,6 +1,10 @@
 node_modules
 dist
 
+# netlify
+.netlify
+netlify
+
 .DS_Store
 Thumbs.db
 
