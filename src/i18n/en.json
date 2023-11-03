@@ -8,10 +8,19 @@
     "loading": "Loading...",
     "story_by": "by",
     "story_comments": "comments",
+    "story_no_comments": "No comments yet.",
     "story_discuss": "discuss",
+    "story_comments_collapsed": "comments collapsed",
+    "story_points": "{points} points",
     "stories_page": "page {count}",
     "stories_prev": "prev",
     "stories_prev_page": "Previous Page",
     "stories_next": "more",
-    "stories_next_page": "Next Page"
+    "stories_next_page": "Next Page",
+    "user_not_found": "User not found.",
+    "user_name": "User",
+    "user_created": "Created",
+    "user_karma": "Karma",
+    "user_submissions": "submissions",
+    "user_comments": "comments"
 }

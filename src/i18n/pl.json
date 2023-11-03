@@ -7,11 +7,20 @@
     "nav_job": "Praca",
     "loading": "Ładowanie...",
     "story_by": "przez",
-    "story_comments": "komentarze",
-    "story_discuss": "dyskusja",
+    "story_comments": "komentarzy",
+    "story_no_comments": "Brak komentarzy.",
+    "story_discuss": "Dyskutuj",
+    "story_comments_collapsed": "komentarze ukryte",
+    "story_points": "{points} punktów",
     "stories_page": "strona {count}",
     "stories_prev": "wczesniej",
     "stories_prev_page": "Wcześniejsza strona",
     "stories_next": "więcej",
-    "stories_next_page": "Następna strona"
+    "stories_next_page": "Następna strona",
+    "user_not_found": "Użytkownik nie znaleziony.",
+    "user_name": "Nazwa",
+    "user_created": "Utworzony",
+    "user_karma": "Karma",
+    "user_submissions": "Wnioski",
+    "user_comments": "Komentarze"
 }

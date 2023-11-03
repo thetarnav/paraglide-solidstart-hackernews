@@ -1,6 +1,7 @@
 import * as solid from 'solid-js'
 import {A, RouteDataArgs, useRouteData} from 'solid-start'
 import * as api from '~/api'
+import * as i18n from '~/i18n'
 
 export const routeData = (props: RouteDataArgs) => {
     const [story] = solid.createResource(() => `item/${props.params.id}`, api.unsafeFetchStory)
@@ -13,7 +14,9 @@ export const Toggle: solid.ParentComponent = props => {
     return (
         <>
             <div class="toggle" classList={{open: open()}}>
-                <a onClick={() => setOpen(o => !o)}>{open() ? '[-]' : '[+] comments collapsed'}</a>
+                <a onClick={() => setOpen(o => !o)}>
+                    {open() ? '[-]' : '[+] ' + i18n.m.story_comments_collapsed()}
+                </a>
             </div>
             <ul class="comment-children" style={{display: open() ? 'block' : 'none'}}>
                 {props.children}
@@ -27,7 +30,7 @@ export const Comment: solid.Component<{comment: api.Comment}> = props => {
         <li class="comment">
             <div class="by">
                 <A href={`/users/${props.comment.user}`}>{props.comment.user}</A>{' '}
-                {props.comment.time_ago} ago
+                {props.comment.time_ago}
             </div>
             <div class="text" innerHTML={props.comment.content} />
             <solid.Show when={props.comment.comments.length}>
@@ -54,16 +57,15 @@ const Story: solid.Component = () => {
                         <span class="host">({story()!.domain})</span>
                     </solid.Show>
                     <p class="meta">
-                        {story()!.points} points | by{' '}
-                        <A href={`/users/${story()!.user}`}>{story()!.user}</A> {story()!.time_ago}{' '}
-                        ago
+                        {i18n.m.story_points({points: story()!.points})} | {i18n.m.story_by()}{' '}
+                        <A href={`/users/${story()!.user}`}>{story()!.user}</A> {story()!.time_ago}
                     </p>
                 </div>
                 <div class="item-view-comments">
                     <p class="item-view-comments-header">
                         {story()!.comments_count
-                            ? story()!.comments_count + ' comments'
-                            : 'No comments yet.'}
+                            ? `${story()!.comments_count} ${i18n.m.story_comments()}`
+                            : i18n.m.story_no_comments()}
                     </p>
                     <ul class="comment-children">
                         <solid.For each={story()!.comments}>
