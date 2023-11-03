@@ -1,8 +1,8 @@
 import * as solid from 'solid-js'
-import * as start from 'solid-start'
+import {A, RouteDataArgs, useRouteData} from 'solid-start'
 import * as api from '~/api'
 
-export const routeData = (props: start.RouteDataArgs) => {
+export const routeData = (props: RouteDataArgs) => {
     const [story] = solid.createResource(() => `item/${props.params.id}`, api.unsafeFetchStory)
     return story
 }
@@ -26,7 +26,7 @@ export const Comment: solid.Component<{comment: api.Comment}> = props => {
     return (
         <li class="comment">
             <div class="by">
-                <start.A href={`/users/${props.comment.user}`}>{props.comment.user}</start.A>{' '}
+                <A href={`/users/${props.comment.user}`}>{props.comment.user}</A>{' '}
                 {props.comment.time_ago} ago
             </div>
             <div class="text" innerHTML={props.comment.content} />
@@ -42,7 +42,7 @@ export const Comment: solid.Component<{comment: api.Comment}> = props => {
 }
 
 const Story: solid.Component = () => {
-    const story = start.useRouteData<typeof routeData>()
+    const story = useRouteData<typeof routeData>()
     return (
         <solid.Show when={story()}>
             <div class="item-view">
@@ -55,8 +55,8 @@ const Story: solid.Component = () => {
                     </solid.Show>
                     <p class="meta">
                         {story()!.points} points | by{' '}
-                        <start.A href={`/users/${story()!.user}`}>{story()!.user}</start.A>{' '}
-                        {story()!.time_ago} ago
+                        <A href={`/users/${story()!.user}`}>{story()!.user}</A> {story()!.time_ago}{' '}
+                        ago
                     </p>
                 </div>
                 <div class="item-view-comments">

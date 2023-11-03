@@ -32,6 +32,18 @@ const Nav: solid.Component = () => {
                 >
                     {i18n.m.built_with()}
                 </a>
+                <div class="language">
+                    <select
+                        name="language"
+                        onChange={e => i18n.setLanguageTag(e.currentTarget.value as any)}
+                    >
+                        {i18n.availableLanguageTags.map(tag => (
+                            <option value={tag} selected={tag === i18n.languageTag()}>
+                                {tag}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </nav>
         </header>
     )

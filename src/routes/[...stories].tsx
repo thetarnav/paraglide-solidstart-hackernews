@@ -1,5 +1,5 @@
 import * as solid from 'solid-js'
-import * as start from 'solid-start'
+import {A, RouteDataArgs, useRouteData} from 'solid-start'
 import * as api from '~/api'
 
 const stories_map = {
@@ -10,7 +10,7 @@ const stories_map = {
     job: 'jobs',
 } as const
 
-export const routeData = ({location, params}: start.RouteDataArgs) => {
+export const routeData = ({location, params}: RouteDataArgs) => {
     const page = () => +location.query.page || 1
     const type = () => (params.stories || 'top') as keyof typeof stories_map
 
@@ -29,9 +29,7 @@ export const Story: solid.Component<{story: api.Story}> = props => {
             <span class="title">
                 <solid.Show
                     when={props.story.url}
-                    fallback={
-                        <start.A href={`/item/${props.story.id}`}>{props.story.title}</start.A>
-                    }
+                    fallback={<A href={`/item/${props.story.id}`}>{props.story.title}</A>}
                 >
                     <a href={props.story.url} target="_blank" rel="noreferrer">
                         {props.story.title}
@@ -43,19 +41,15 @@ export const Story: solid.Component<{story: api.Story}> = props => {
             <span class="meta">
                 <solid.Show
                     when={props.story.type !== 'job'}
-                    fallback={
-                        <start.A href={`/stories/${props.story.id}`}>
-                            {props.story.time_ago}
-                        </start.A>
-                    }
+                    fallback={<A href={`/stories/${props.story.id}`}>{props.story.time_ago}</A>}
                 >
-                    by <start.A href={`/users/${props.story.user}`}>{props.story.user}</start.A>{' '}
+                    by <A href={`/users/${props.story.user}`}>{props.story.user}</A>{' '}
                     {props.story.time_ago} |{' '}
-                    <start.A href={`/stories/${props.story.id}`}>
+                    <A href={`/stories/${props.story.id}`}>
                         {props.story.comments_count
                             ? `${props.story.comments_count} comments`
                             : 'discuss'}
-                    </start.A>
+                    </A>
                 </solid.Show>
             </span>
             <solid.Show when={props.story.type !== 'link'}>
@@ -67,7 +61,7 @@ export const Story: solid.Component<{story: api.Story}> = props => {
 }
 
 const Stories: solid.Component = () => {
-    const {page, type, stories} = start.useRouteData<typeof routeData>()
+    const {page, type, stories} = useRouteData<typeof routeData>()
 
     return (
         <div class="news-view">
@@ -80,13 +74,13 @@ const Stories: solid.Component = () => {
                         </span>
                     }
                 >
-                    <start.A
+                    <A
                         class="page-link"
                         href={`/${type()}?page=${page() - 1}`}
                         aria-label="Previous Page"
                     >
                         {'<'} prev
-                    </start.A>
+                    </A>
                 </solid.Show>
                 <span>page {page()}</span>
                 <solid.Show
@@ -97,13 +91,13 @@ const Stories: solid.Component = () => {
                         </span>
                     }
                 >
-                    <start.A
+                    <A
                         class="page-link"
                         href={`/${type()}?page=${page() + 1}`}
                         aria-label="Next Page"
                     >
                         more {'>'}
-                    </start.A>
+                    </A>
                 </solid.Show>
             </div>
             <main class="news-list">

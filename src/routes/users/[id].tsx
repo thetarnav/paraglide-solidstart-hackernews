@@ -1,14 +1,14 @@
 import * as solid from 'solid-js'
-import * as start from 'solid-start'
+import {RouteDataArgs, useRouteData} from 'solid-start'
 import * as api from '~/api'
 
-export const routeData = (props: start.RouteDataArgs) => {
+export const routeData = (props: RouteDataArgs) => {
     const [user] = solid.createResource(() => `user/${props.params.id}`, api.unsafeFetchUser)
     return user
 }
 
 const UserPage: solid.Component = () => {
-    const user = start.useRouteData<typeof routeData>()
+    const user = useRouteData<typeof routeData>()
 
     return (
         <div class="user-view">

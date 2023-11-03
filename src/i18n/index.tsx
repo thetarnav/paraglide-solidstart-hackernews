@@ -8,9 +8,10 @@ const entries = <T extends object>(obj: T) => Object.entries(obj) as [keyof T, T
 export let m: typeof messages = messages
 export let languageTag: solid.Accessor<paraglide.AvailableLanguageTag> = paraglide.languageTag
 export const setLanguageTag = paraglide.setLanguageTag
+export const availableLanguageTags = paraglide.availableLanguageTags
 
 export const init = (): void => {
-    // no reactivity needed on server
+    /* no reactivity needed on server */
     if (solid_web.isServer) return
 
     const [_languageTag, _setLanguageTag] = solid.createSignal(paraglide.languageTag())
