@@ -1,5 +1,5 @@
 {
-    "name": "paraglide-solidstart-example",
+    "name": "paraglide-solidstart-hackernews",
     "scripts": {
         "dev": "solid-start dev",
         "build:i18n": "paraglide-js compile --namespace hn",
