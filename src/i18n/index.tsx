@@ -12,7 +12,7 @@ export const init = (): void => {
     /* no reactivity needed on server */
     if (solid_web.isServer) return
 
-    const [_languageTag, _setLanguageTag] = solid.createSignal(paraglide.languageTag())
+    const [_languageTag, _setLanguageTag] = solid.createSignal(paraglide.sourceLanguageTag)
     paraglide.setLanguageTag(_languageTag)
     setLanguageTag = _setLanguageTag
     languageTag = _languageTag
