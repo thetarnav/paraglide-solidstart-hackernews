@@ -6,7 +6,8 @@ TODO
 - [x] basic route mapping to include language tag prefix
 - [ ] fix language tag leaking between requests
 - [ ] language tag query param
-- [ ] reuse existing url matching logic
+- [ ] keep prefix after navigation
+- [ ] reuse existing url matching logic?
 - [ ] switching language as page reload?
 - [ ] make this into package
 
