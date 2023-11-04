@@ -66,7 +66,9 @@ export default function Root() {
                 <solid.ErrorBoundary fallback={<></>}>
                     <solid.Suspense fallback={<div class="news-list-nav">{i18n.m.loading()}</div>}>
                         <start.Routes>
-                            <start.FileRoutes />
+                            <i18n.I18nRoutes>
+                                <start.FileRoutes />
+                            </i18n.I18nRoutes>
                         </start.Routes>
                     </solid.Suspense>
                 </solid.ErrorBoundary>
