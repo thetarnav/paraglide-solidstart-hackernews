@@ -1,7 +1,7 @@
 import * as solid from 'solid-js'
 import {A, RouteDataArgs, useRouteData} from 'solid-start'
+import * as m from '@inlang/paraglide-js/hn/messages'
 import * as api from '~/api'
-import * as i18n from '~/i18n'
 
 export const routeData = (props: RouteDataArgs) => {
     const [story] = solid.createResource(() => `item/${props.params.id}`, api.unsafeFetchStory)
@@ -15,7 +15,7 @@ export const Toggle: solid.ParentComponent = props => {
         <>
             <div class="toggle" classList={{open: open()}}>
                 <a onClick={() => setOpen(o => !o)}>
-                    {open() ? '[-]' : '[+] ' + i18n.m.story_comments_collapsed()}
+                    {open() ? '[-]' : '[+] ' + m.story_comments_collapsed()}
                 </a>
             </div>
             <ul class="comment-children" style={{display: open() ? 'block' : 'none'}}>
@@ -57,15 +57,15 @@ const Story: solid.Component = () => {
                         <span class="host">({story()!.domain})</span>
                     </solid.Show>
                     <p class="meta">
-                        {i18n.m.story_points({points: story()!.points})} | {i18n.m.story_by()}{' '}
+                        {m.story_points({points: story()!.points})} | {m.story_by()}{' '}
                         <A href={`/users/${story()!.user}`}>{story()!.user}</A> {story()!.time_ago}
                     </p>
                 </div>
                 <div class="item-view-comments">
                     <p class="item-view-comments-header">
                         {story()!.comments_count
-                            ? `${story()!.comments_count} ${i18n.m.story_comments()}`
-                            : i18n.m.story_no_comments()}
+                            ? `${story()!.comments_count} ${m.story_comments()}`
+                            : m.story_no_comments()}
                     </p>
                     <ul class="comment-children">
                         <solid.For each={story()!.comments}>

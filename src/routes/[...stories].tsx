@@ -1,7 +1,7 @@
 import * as solid from 'solid-js'
 import {A, RouteDataArgs, useRouteData} from 'solid-start'
+import * as m from '@inlang/paraglide-js/hn/messages'
 import * as api from '~/api'
-import * as i18n from '~/i18n'
 
 const stories_map = {
     top: 'news',
@@ -44,13 +44,12 @@ export const Story: solid.Component<{story: api.Story}> = props => {
                     when={props.story.type !== 'job'}
                     fallback={<A href={`/stories/${props.story.id}`}>{props.story.time_ago}</A>}
                 >
-                    {i18n.m.story_by()}{' '}
-                    <A href={`/users/${props.story.user}`}>{props.story.user}</A>{' '}
+                    {m.story_by()} <A href={`/users/${props.story.user}`}>{props.story.user}</A>{' '}
                     {props.story.time_ago} |{' '}
                     <A href={`/stories/${props.story.id}`}>
                         {props.story.comments_count
-                            ? `${props.story.comments_count} ${i18n.m.story_comments()}`
-                            : i18n.m.story_discuss()}
+                            ? `${props.story.comments_count} ${m.story_comments()}`
+                            : m.story_discuss()}
                     </A>
                 </solid.Show>
             </span>
@@ -72,33 +71,33 @@ const Stories: solid.Component = () => {
                     when={page() > 1}
                     fallback={
                         <span class="page-link disabled" aria-disabled="true">
-                            {'<'} {i18n.m.stories_prev()}
+                            {'<'} {m.stories_prev()}
                         </span>
                     }
                 >
                     <A
                         class="page-link"
                         href={`/${type()}?page=${page() - 1}`}
-                        aria-label={i18n.m.stories_prev_page()}
+                        aria-label={m.stories_prev_page()}
                     >
-                        {'<'} {i18n.m.stories_prev()}
+                        {'<'} {m.stories_prev()}
                     </A>
                 </solid.Show>
-                <span>{i18n.m.stories_page({count: page()})}</span>
+                <span>{m.stories_page({count: page()})}</span>
                 <solid.Show
                     when={stories() && stories()!.length >= 29}
                     fallback={
                         <span class="page-link disabled" aria-disabled="true">
-                            {i18n.m.stories_next()} {'>'}
+                            {m.stories_next()} {'>'}
                         </span>
                     }
                 >
                     <A
                         class="page-link"
                         href={`/${type()}?page=${page() + 1}`}
-                        aria-label={i18n.m.stories_next_page()}
+                        aria-label={m.stories_next_page()}
                     >
-                        {i18n.m.stories_next()} {'>'}
+                        {m.stories_next()} {'>'}
                     </A>
                 </solid.Show>
             </div>
