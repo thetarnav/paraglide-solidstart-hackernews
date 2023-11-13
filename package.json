@@ -3,7 +3,7 @@
     "private": true,
     "scripts": {
         "dev": "solid-start dev",
-        "build:i18n": "paraglide-js compile --namespace hn",
+        "build:i18n": "paraglide-js compile",
         "build:start": "solid-start build",
         "build": "npm run build:i18n && npm run build:start",
         "start": "solid-start start"
@@ -11,20 +11,21 @@
     "type": "module",
     "main": "./dist/index.js",
     "devDependencies": {
-        "@inlang/paraglide-js": "1.0.0-prerelease.5",
-        "@types/babel__core": "^7.20.3",
-        "@types/node": "^20.8.10",
+        "@inlang/paraglide-js": "1.0.0-prerelease.9",
+        "@types/babel__core": "^7.20.4",
+        "@types/node": "^20.9.0",
         "esbuild": "^0.19.5",
-        "prettier": "^3.0.3",
-        "solid-start-netlify": "^0.3.9",
+        "prettier": "^3.1.0",
+        "solid-start-netlify": "^0.3.10",
+        "solid-start-static": "^0.3.10",
         "typescript": "^5.2.2",
         "vite": "^4.5.0"
     },
     "dependencies": {
         "@solidjs/meta": "^0.29.1",
-        "@solidjs/router": "^0.8.3",
+        "@solidjs/router": "^0.9.1",
         "solid-js": "^1.8.5",
-        "solid-start": "^0.3.9"
+        "solid-start": "^0.3.10"
     },
     "packageManager": "pnpm@8.9.0",
     "engines": {

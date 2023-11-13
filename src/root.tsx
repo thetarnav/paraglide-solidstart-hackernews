@@ -1,7 +1,7 @@
 // @refresh reload
 import * as solid from 'solid-js'
 import * as start from 'solid-start'
-import * as m from '@inlang/paraglide-js/hn/messages'
+import * as m from '~/paraglide/messages.js'
 import * as i18n from './i18n'
 
 import './root.css'

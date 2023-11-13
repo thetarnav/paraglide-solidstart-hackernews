@@ -12,12 +12,10 @@ TODO
 */
 
 import * as solid from 'solid-js'
-import * as m from '@inlang/paraglide-js/hn/messages'
-import * as paraglide from '@inlang/paraglide-js/hn'
+import * as paraglide from '../paraglide/runtime.js'
 import * as router from '@solidjs/router'
 
 export type AvailableLanguageTag = paraglide.AvailableLanguageTag
-export type Messages = typeof m
 
 export const availableLanguageTags = paraglide.availableLanguageTags
 

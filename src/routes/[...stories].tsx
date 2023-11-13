@@ -1,6 +1,6 @@
 import * as solid from 'solid-js'
 import {A, RouteDataArgs, useRouteData} from 'solid-start'
-import * as m from '@inlang/paraglide-js/hn/messages'
+import * as m from '~/paraglide/messages.js'
 import * as api from '~/api'
 
 const stories_map = {
