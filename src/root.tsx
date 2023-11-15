@@ -80,14 +80,14 @@ const Nav: solid.Component = () => {
 }
 
 const LanguageSwitch: solid.Component = () => {
-    const language_tag = i18n.useLanguageTag()
+    const language_tag = i18n.languageTag()
 
     return (
         <select
             name="language"
             onChange={e => {
                 const new_language_tag = e.target.value as i18n.AvailableLanguageTag
-                i18n.switchLanguageTag(new_language_tag)
+                i18n.setLanguageTag(new_language_tag)
             }}
         >
             {i18n.availableLanguageTags.map(tag => (
