@@ -1,10 +1,16 @@
 // @refresh reload
 import * as solid from 'solid-js'
+import * as solid_web from 'solid-js/web'
 import * as start from 'solid-start'
-import * as m from '~/paraglide/messages.js'
 import * as i18n from './i18n'
+import messages_pl_url from './paraglide/messages/pl.js?url'
+import messages_en_url from './paraglide/messages/en.js?url'
 
 import './root.css'
+
+declare global {
+    var m: typeof import('./paraglide/messages/pl.js')
+}
 
 export default function Root() {
     const language_tag = i18n.getLanguageTagFromURL()
@@ -37,6 +43,13 @@ export default function Root() {
                             </start.Routes>
                         </solid.Suspense>
                     </solid.ErrorBoundary>
+                    <solid_web.NoHydration>
+                        <script type="module">
+                            {`import * as m from "${
+                                language_tag === 'pl' ? messages_pl_url : messages_en_url
+                            }";globalThis.m=m;`}
+                        </script>
+                    </solid_web.NoHydration>
                     <start.Scripts />
                 </start.Body>
             </start.Html>
