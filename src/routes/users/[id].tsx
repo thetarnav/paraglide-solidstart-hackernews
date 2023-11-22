@@ -1,6 +1,5 @@
 import * as solid from 'solid-js'
 import {RouteDataArgs, useRouteData} from 'solid-start'
-import * as m from '~/paraglide/messages.js'
 import * as api from '~/api'
 
 export const routeData = (props: RouteDataArgs) => {
