@@ -3,7 +3,7 @@
     "private": true,
     "scripts": {
         "dev": "solid-start dev",
-        "build:i18n": "paraglide-js compile",
+        "build:i18n": "paraglide-js compile --project ./project.inlang.json",
         "build:start": "solid-start build",
         "build": "npm run build:i18n && npm run build:start",
         "start": "solid-start start"
