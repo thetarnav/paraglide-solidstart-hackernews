@@ -7,7 +7,8 @@ import * as i18n from './i18n'
 import './root.css'
 
 export default function Root() {
-    const language_tag = i18n.getLanguageTagFromURL()
+    const url_language_tag = i18n.getLanguageTagFromURL()
+    const language_tag = url_language_tag ?? i18n.sourceLanguageTag
 
     return (
         <i18n.LanguageTagProvider value={language_tag}>
@@ -16,24 +17,18 @@ export default function Root() {
                     <start.Title>Paraglide SolidStart - Hacker News</start.Title>
                     <start.Meta charset="utf-8" />
                     <start.Meta name="viewport" content="width=device-width, initial-scale=1" />
-                    {(() => {
-                        /*
-                        Need to read it outside of the <Meta> because of this bug:
-                        https://github.com/solidjs/solid-start/issues/1115
-                        */
-                        const description = m.root_description()
-                        return <start.Meta name="description" content={description} />
-                    })()}
+                    <start.Meta
+                        name="description"
+                        content={m.root_description({}, {languageTag: language_tag})}
+                    />
                     <start.Link rel="manifest" href="/manifest.webmanifest" />
                 </start.Head>
                 <start.Body>
                     <Nav />
                     <solid.ErrorBoundary fallback={<></>}>
                         <solid.Suspense fallback={<div class="news-list-nav">{m.loading()}</div>}>
-                            <start.Routes>
-                                <i18n.I18nRoutes>
-                                    <start.FileRoutes />
-                                </i18n.I18nRoutes>
+                            <start.Routes base={url_language_tag}>
+                                <start.FileRoutes />
                             </start.Routes>
                         </solid.Suspense>
                     </solid.ErrorBoundary>
@@ -72,23 +67,20 @@ const Nav: solid.Component = () => {
                     {m.root_built_with()}
                 </a>
                 <div class="language">
-                    <LanguageSwitch />
+                    <LanguageSwitcher />
                 </div>
             </nav>
         </header>
     )
 }
 
-const LanguageSwitch: solid.Component = () => {
+const LanguageSwitcher: solid.Component = () => {
     const language_tag = i18n.languageTag()
 
     return (
         <select
             name="language"
-            onChange={e => {
-                const new_language_tag = e.target.value as i18n.AvailableLanguageTag
-                i18n.setLanguageTag(new_language_tag)
-            }}
+            onChange={e => i18n.setLanguageTag(e.target.value as i18n.AvailableLanguageTag)}
         >
             {i18n.availableLanguageTags.map(tag => (
                 <option value={tag} selected={tag === language_tag}>
