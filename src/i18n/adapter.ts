@@ -54,39 +54,6 @@ export function getLanguageTagFromURL<T extends string>(
 }
 
 /**
- * Prefix a pathname with a language tag.
- *
- * @param pathname The pathname to prefix. (e.g. "/foo", "foo")
- * @param target_language_tag The language tag to prefix the pathname with. (e.g. "en")
- * @param all_language_tags All available language tags. (From paraglide, e.g. "en", "de")
- * @param source_language_tag The language tag of the source language. (e.g. "en")
- * @returns The prefixed pathname.
- * - If the pathname already has a language tag, it will be replaced with the target language tag.
- * - If the pathname has no language tag, it will be prefixed with the target language tag.
- * - If the source language tag is the same as the target language tag, or target language tag is already in the pathname, the pathname will be returned unchanged. (can be checked with `===`)
- */
-export function prefixPathnameWithLanguageTag<T extends string>(
-    pathname: string,
-    target_language_tag: T,
-    all_language_tags: readonly T[],
-    source_language_tag: T,
-): string {
-    const normalized_pathname = normalizePathname(pathname)
-    const pathname_language_tag = languageTagInPathname(normalized_pathname, all_language_tags)
-
-    if (pathname_language_tag === target_language_tag) {
-        return pathname
-    }
-    if (pathname_language_tag !== undefined) {
-        return normalized_pathname.replace(pathname_language_tag, target_language_tag)
-    }
-    if (source_language_tag === target_language_tag) {
-        return pathname
-    }
-    return '/' + target_language_tag + normalized_pathname
-}
-
-/**
  * The compiled paraglide runtime module.
  * (e.g. "paraglide/runtime.js")
  */
@@ -141,47 +108,60 @@ export function createI18n<T extends string>(paraglide: Paraglide<T>): I18n<T> {
     }
     // BROWSER
     else {
+        let language_tag: T
+
         LanguageTagProvider = props => {
-            const language_tag = props.value
-            setLanguageTag(language_tag)
+            language_tag = props.value
+            paraglide.setLanguageTag(language_tag)
+
+            const navigate = router.useNavigate()
 
             /*
             Keep the language tag in the URL
             */
-            const navigate = router.useNavigate()
             router.useBeforeLeave(e => {
                 if (typeof e.to !== 'string') return
 
-                const pathname_with_prefix = prefixPathnameWithLanguageTag(
-                    e.to,
-                    language_tag,
+                const from_pathname = normalizePathname(e.from.pathname)
+                const from_language_tag = languageTagInPathname(
+                    from_pathname,
                     paraglide.availableLanguageTags,
-                    paraglide.sourceLanguageTag,
                 )
-                /* prevent infinite loop */
-                if (pathname_with_prefix === e.to) return
+                const to_pathname = normalizePathname(e.to)
+                const to_language_tag = languageTagInPathname(
+                    to_pathname,
+                    paraglide.availableLanguageTags,
+                )
+
+                //  /en/foo → /en/bar  |  /foo → /bar
+                if (to_language_tag === from_language_tag) return
 
                 e.preventDefault()
-                navigate(pathname_with_prefix, e.options)
+
+                //  /en/foo → /bar  |  /de/foo → /bar
+                if (!to_language_tag) {
+                    navigate('/' + from_language_tag + to_pathname, e.options)
+                }
+                //  /foo → /en/bar
+                else if (to_language_tag === paraglide.sourceLanguageTag && !from_language_tag) {
+                    navigate(to_pathname.slice(to_language_tag.length + 1), e.options)
+                }
+                //  /de/foo → /en/bar  |  /foo → /de/bar
+                else {
+                    location.pathname = to_pathname
+                }
             })
 
             return props.children
         }
 
         setLanguageTag = paraglide.setLanguageTag
-        languageTag = paraglide.languageTag
+        languageTag = () => language_tag
 
         paraglide.onSetLanguageTag(new_language_tag => {
-            const new_pathname = prefixPathnameWithLanguageTag(
-                location.pathname,
-                new_language_tag,
-                paraglide.availableLanguageTags,
-                paraglide.sourceLanguageTag,
-            )
-            /* prevent infinite loop */
-            if (new_pathname !== location.pathname) {
-                location.pathname = new_pathname
-            }
+            if (new_language_tag === language_tag) return
+            const pathname = normalizePathname(location.pathname)
+            location.pathname = '/' + new_language_tag + pathname.replace('/' + language_tag, '')
         })
     }
 
