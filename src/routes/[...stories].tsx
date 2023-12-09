@@ -2,6 +2,7 @@ import * as solid from 'solid-js'
 import {A, RouteDataArgs, useRouteData} from 'solid-start'
 import * as m from '~/paraglide/messages.js'
 import * as api from '~/api'
+import * as i18n from '~/i18n'
 
 const stories_map = {
     top: 'news',
@@ -30,9 +31,13 @@ export const Story: solid.Component<{story: api.Story}> = props => {
             <span class="title">
                 <solid.Show
                     when={props.story.url}
-                    fallback={<A href={`/item/${props.story.id}`}>{props.story.title}</A>}
+                    fallback={
+                        <A href={i18n.translateHref(`/item/${props.story.id}`)}>
+                            {props.story.title}
+                        </A>
+                    }
                 >
-                    <a href={props.story.url} target="_blank" rel="noreferrer">
+                    <a href={i18n.translateHref(props.story.url)} target="_blank" rel="noreferrer">
                         {props.story.title}
                     </a>
                     <span class="host"> ({props.story.domain})</span>
@@ -42,11 +47,18 @@ export const Story: solid.Component<{story: api.Story}> = props => {
             <span class="meta">
                 <solid.Show
                     when={props.story.type !== 'job'}
-                    fallback={<A href={`/stories/${props.story.id}`}>{props.story.time_ago}</A>}
+                    fallback={
+                        <A href={i18n.translateHref(`/stories/${props.story.id}`)}>
+                            {props.story.time_ago}
+                        </A>
+                    }
                 >
-                    {m.story_by()} <A href={`/users/${props.story.user}`}>{props.story.user}</A>{' '}
+                    {m.story_by()}{' '}
+                    <A href={i18n.translateHref(`/users/${props.story.user}`)}>
+                        {props.story.user}
+                    </A>{' '}
                     {props.story.time_ago} |{' '}
-                    <A href={`/stories/${props.story.id}`}>
+                    <A href={i18n.translateHref(`/stories/${props.story.id}`)}>
                         {props.story.comments_count
                             ? `${props.story.comments_count} ${m.story_comments()}`
                             : m.story_discuss()}
@@ -77,7 +89,7 @@ const Stories: solid.Component = () => {
                 >
                     <A
                         class="page-link"
-                        href={`/${type()}?page=${page() - 1}`}
+                        href={i18n.translateHref(`/${type()}?page=${page() - 1}`)}
                         aria-label={m.stories_prev_page()}
                     >
                         {'<'} {m.stories_prev()}
@@ -94,7 +106,7 @@ const Stories: solid.Component = () => {
                 >
                     <A
                         class="page-link"
-                        href={`/${type()}?page=${page() + 1}`}
+                        href={i18n.translateHref(`/${type()}?page=${page() + 1}`)}
                         aria-label={m.stories_next_page()}
                     >
                         {m.stories_next()} {'>'}

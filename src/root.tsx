@@ -43,19 +43,19 @@ const Nav: solid.Component = () => {
     return (
         <header class="header">
             <nav class="inner">
-                <start.A href="/">
+                <start.A href={i18n.translateHref('/')}>
                     <strong>HN</strong>
                 </start.A>
-                <start.A href="/new">
+                <start.A href={i18n.translateHref('/new')}>
                     <strong>{m.nav_new()}</strong>
                 </start.A>
-                <start.A href="/show">
+                <start.A href={i18n.translateHref('/show')}>
                     <strong>{m.nav_show()}</strong>
                 </start.A>
-                <start.A href="/ask">
+                <start.A href={i18n.translateHref('/ask')}>
                     <strong>{m.nav_ask()}</strong>
                 </start.A>
-                <start.A href="/job">
+                <start.A href={i18n.translateHref('/job')}>
                     <strong>{m.nav_job()}</strong>
                 </start.A>
                 <a
@@ -67,26 +67,9 @@ const Nav: solid.Component = () => {
                     {m.root_built_with()}
                 </a>
                 <div class="language">
-                    <LanguageSwitcher />
+                    <i18n.LocaleSwitcher />
                 </div>
             </nav>
         </header>
-    )
-}
-
-const LanguageSwitcher: solid.Component = () => {
-    const language_tag = i18n.languageTag()
-
-    return (
-        <select
-            name="language"
-            onChange={e => i18n.setLanguageTag(e.target.value as i18n.AvailableLanguageTag)}
-        >
-            {i18n.availableLanguageTags.map(tag => (
-                <option value={tag} selected={tag === language_tag}>
-                    {tag}
-                </option>
-            ))}
-        </select>
     )
 }

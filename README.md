@@ -19,3 +19,10 @@ pnpm run dev
 # or start the server and open the app in a new browser tab
 pnpm run dev -- --open
 ```
+
+TODO:
+
+-   [x] translate href links for ssr
+-   [ ] locale switching when offline
+-   [ ] outing out of prefixing the locale in the url
+-   [ ] mapping api routes

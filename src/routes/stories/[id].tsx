@@ -2,6 +2,7 @@ import * as solid from 'solid-js'
 import {A, RouteDataArgs, useRouteData} from 'solid-start'
 import * as m from '~/paraglide/messages.js'
 import * as api from '~/api'
+import * as i18n from '~/i18n'
 
 export const routeData = (props: RouteDataArgs) => {
     const [story] = solid.createResource(() => `item/${props.params.id}`, api.unsafeFetchStory)
@@ -29,7 +30,9 @@ export const Comment: solid.Component<{comment: api.Comment}> = props => {
     return (
         <li class="comment">
             <div class="by">
-                <A href={`/users/${props.comment.user}`}>{props.comment.user}</A>{' '}
+                <A href={i18n.translateHref(`/users/${props.comment.user}`)}>
+                    {props.comment.user}
+                </A>{' '}
                 {props.comment.time_ago}
             </div>
             <div class="text" innerHTML={props.comment.content} />
@@ -58,7 +61,8 @@ const Story: solid.Component = () => {
                     </solid.Show>
                     <p class="meta">
                         {m.story_points({points: story()!.points})} | {m.story_by()}{' '}
-                        <A href={`/users/${story()!.user}`}>{story()!.user}</A> {story()!.time_ago}
+                        <A href={i18n.translateHref(`/users/${story()!.user}`)}>{story()!.user}</A>{' '}
+                        {story()!.time_ago}
                     </p>
                 </div>
                 <div class="item-view-comments">
