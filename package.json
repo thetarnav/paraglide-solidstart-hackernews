@@ -1,36 +1,33 @@
 {
-    "name": "paraglide-solidstart-hackernews",
-    "private": true,
-    "scripts": {
-        "dev": "solid-start dev",
-        "build:i18n": "paraglide-js compile --project ./project.inlang.json",
-        "build:start": "solid-start build",
-        "build": "npm run build:i18n && npm run build:start",
-        "start": "solid-start start"
-    },
-    "type": "module",
-    "main": "./dist/index.js",
-    "devDependencies": {
-        "@inlang/paraglide-js": "1.0.0-prerelease.12",
-        "@types/babel__core": "^7.20.5",
-        "@types/node": "^20.10.1",
-        "esbuild": "^0.19.8",
-        "prettier": "^3.1.0",
-        "solid-start-netlify": "^0.3.10",
-        "solid-start-node": "^0.3.10",
-        "solid-start-static": "^0.3.10",
-        "typescript": "^5.3.2",
-        "vite": "^4.5.0"
-    },
-    "dependencies": {
-        "@solidjs/meta": "^0.29.1",
-        "@solidjs/router": "^0.9.1",
-        "solid-js": "^1.8.6",
-        "solid-start": "^0.3.10"
-    },
-    "packageManager": "pnpm@8.9.0",
-    "engines": {
-        "node": ">=18",
-        "pnpm": ">=8.6.0"
-    }
+	"name": "paraglide-solidstart-hackernews",
+	"private": true,
+	"scripts": {
+		"dev": "vinxi dev",
+		"build:i18n": "paraglide-js compile --project ./project.inlang",
+		"build:start": "vinxi build",
+		"build": "npm run build:i18n && npm run build:start",
+		"start": "node ./.output/server/index.mjs"
+	},
+	"type": "module",
+	"main": "./dist/index.js",
+	"dependencies": {
+		"@inlang/paraglide-js-adapter-solidstart": "0.0.1",
+		"@solidjs/router": "^0.10.5",
+		"@solidjs/start": "^0.4",
+		"solid-js": "^1.8.7",
+		"vinxi": "^0.0.61"
+	},
+	"devDependencies": {
+		"@inlang/paraglide-js": "1.0.0-prerelease.22",
+		"@inlang/paraglide-js-adapter-vite": "1.0.3",
+		"@types/node": "^20.10.6",
+		"prettier": "^3.1.1",
+		"typescript": "^5.3.3",
+		"vite": "^4.5.1"
+	},
+	"packageManager": "pnpm@8.12.0",
+	"engines": {
+		"node": ">=18",
+		"pnpm": ">=8.9.0"
+	}
 }
