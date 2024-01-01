@@ -8,8 +8,9 @@ netlify
 .DS_Store
 Thumbs.db
 
-# solid
-.solid
+# solidstart
+.vinxi
+.output
 
 # Vite
 **/vite.config.ts.timestamp-*.*
