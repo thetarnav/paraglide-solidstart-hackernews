@@ -33,19 +33,19 @@ const Nav: solid.Component = () => {
 	return (
 		<header class="header">
 			<nav class="inner">
-				<A href={i18n.translateHref("/")}>
+				<A href="/">
 					<strong>HN</strong>
 				</A>
-				<A href={i18n.translateHref("/new")}>
+				<A href="/new">
 					<strong>{m.nav_new()}</strong>
 				</A>
-				<A href={i18n.translateHref("/show")}>
+				<A href="/show">
 					<strong>{m.nav_show()}</strong>
 				</A>
-				<A href={i18n.translateHref("/ask")}>
+				<A href="/ask">
 					<strong>{m.nav_ask()}</strong>
 				</A>
-				<A href={i18n.translateHref("/job")}>
+				<A href="/job">
 					<strong>{m.nav_job()}</strong>
 				</A>
 				<a

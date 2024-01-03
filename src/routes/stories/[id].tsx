@@ -2,7 +2,6 @@ import * as solid from "solid-js"
 import * as router from "@solidjs/router"
 import * as m from "~/paraglide/messages.js"
 import * as api from "~/api"
-import * as i18n from "~/i18n"
 
 export const route = {
 	load(props) {
@@ -27,9 +26,7 @@ const Story: solid.Component<router.RouteSectionProps> = props => {
 					</solid.Show>
 					<p class="meta">
 						{m.story_points({points: story()!.points})} | {m.story_by()}{" "}
-						<router.A href={i18n.translateHref(`/users/${story()!.user}`)}>
-							{story()!.user}
-						</router.A>{" "}
+						<router.A href={`/users/${story()!.user}`}>{story()!.user}</router.A>{" "}
 						{story()!.time_ago}
 					</p>
 				</div>
@@ -52,7 +49,7 @@ const Story: solid.Component<router.RouteSectionProps> = props => {
 
 export default Story
 
-export const Toggle: solid.ParentComponent = props => {
+const Toggle: solid.ParentComponent = props => {
 	const [open, setOpen] = solid.createSignal(true)
 
 	return (
@@ -69,13 +66,11 @@ export const Toggle: solid.ParentComponent = props => {
 	)
 }
 
-export const Comment: solid.Component<{comment: api.Comment}> = props => {
+const Comment: solid.Component<{comment: api.Comment}> = props => {
 	return (
 		<li class="comment">
 			<div class="by">
-				<router.A href={i18n.translateHref(`/users/${props.comment.user}`)}>
-					{props.comment.user}
-				</router.A>{" "}
+				<router.A href={`/users/${props.comment.user}`}>{props.comment.user}</router.A>{" "}
 				{props.comment.time_ago}
 			</div>
 			<div class="text" innerHTML={props.comment.content} />
