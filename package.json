@@ -6,7 +6,8 @@
 		"build:i18n": "paraglide-js compile --project ./project.inlang",
 		"build:start": "vinxi build",
 		"build": "npm run build:i18n && npm run build:start",
-		"start": "node ./.output/server/index.mjs"
+		"start": "node ./.output/server/index.mjs",
+		"format": "prettier -w --cache ."
 	},
 	"type": "module",
 	"main": "./dist/index.js",

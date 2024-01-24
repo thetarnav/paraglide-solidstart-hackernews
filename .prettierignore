@@ -1,0 +1,12 @@
+node_modules
+dist
+pnpm-lock.yaml
+.vscode
+
+# netlify
+.netlify
+netlify
+
+# solidstart
+.vinxi
+.output
